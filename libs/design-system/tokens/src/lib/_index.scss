@@ -1,0 +1,13 @@
+// ═══════════════════════════════════════════════════════
+// 📦 Design System Entry Point — @forward all modules
+//
+// Usage in any component or app SCSS file:
+//   @use 'index' as ds;
+//   color: ds.color('primary');
+//   @include ds.typography('heading-lg');
+//   @include ds.respond-to('desktop') { ... }
+// ═══════════════════════════════════════════════════════
+@forward 'tokens';
+@forward 'typography';
+@forward 'mixins';
+@forward 'functions';

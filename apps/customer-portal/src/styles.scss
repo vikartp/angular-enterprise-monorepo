@@ -1,0 +1,80 @@
+// ═══════════════════════════════════════════════════════
+// 🌐 Global Styles — Customer Portal
+//
+// Imports design system tokens via SCSS includePaths.
+// No relative path hacks needed.
+// ═══════════════════════════════════════════════════════
+@use 'sass:map';
+@use 'index' as ds;
+
+// ── CSS Reset ──
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ── Inject CSS Custom Properties for runtime theming ──
+:root {
+  @include ds.inject-theme(ds.$color-semantic);
+  font-family: map.get(ds.$font-families, 'sans');
+  font-size: 16px;
+  line-height: 1.6;
+  color: ds.color('text-primary');
+  background-color: ds.color('background');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+}
+
+// ── Global Typography ──
+h1 { @include ds.typography('heading-xl'); }
+h2 { @include ds.typography('heading-lg'); }
+h3 { @include ds.typography('heading-md'); }
+h4 { @include ds.typography('heading-sm'); }
+p  { @include ds.typography('body-md'); }
+
+// ── Global Link Styles ──
+a {
+  color: ds.color('primary');
+  text-decoration: none;
+  transition: color ds.transition('fast');
+
+  &:hover {
+    color: ds.color('primary-hover');
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring();
+  }
+}
+
+// ── Selection color ──
+::selection {
+  background-color: ds.color('primary-light');
+  color: ds.color('text-primary');
+}
+
+// ── Scrollbar (Webkit) ──
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: ds.color('background');
+}
+
+::-webkit-scrollbar-thumb {
+  background: ds.color('border-strong');
+  border-radius: ds.radius('full');
+
+  &:hover {
+    background: ds.color('text-secondary');
+  }
+}

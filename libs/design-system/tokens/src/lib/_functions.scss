@@ -1,0 +1,86 @@
+// ═══════════════════════════════════════════════════════
+// ⚙️ FUNCTIONS — SCSS Utility Functions
+// ═══════════════════════════════════════════════════════
+@use 'sass:math';
+@use 'sass:map';
+@use 'tokens' as t;
+
+/// Get a semantic color value
+/// @param {String} $name - Color key from $color-semantic
+/// @return {Color}
+/// @example color: color('primary');
+@function color($name) {
+  $value: map.get(t.$color-semantic, $name);
+  @if not $value {
+    @error "Color '#{$name}' not found in $color-semantic. Available: #{map.keys(t.$color-semantic)}";
+  }
+  @return $value;
+}
+
+/// Get a primitive color value
+/// @param {String} $name - Color key from $color-primitives
+/// @return {Color}
+/// @example color: color-raw('blue-500');
+@function color-raw($name) {
+  $value: map.get(t.$color-primitives, $name);
+  @if not $value {
+    @error "Primitive color '#{$name}' not found in $color-primitives.";
+  }
+  @return $value;
+}
+
+/// Get spacing value from the spacing scale
+/// @param {String} $key - Spacing key from $spacing
+/// @return {Length}
+/// @example padding: spacing('4');
+@function spacing($key) {
+  $value: map.get(t.$spacing, $key);
+  @if $value == null {
+    @error "Spacing '#{$key}' not found in $spacing. Available: #{map.keys(t.$spacing)}";
+  }
+  @return $value;
+}
+
+/// Get border-radius value
+/// @param {String} $key - Radius key from $radius
+/// @return {Length}
+/// @example border-radius: radius('md');
+@function radius($key) {
+  $value: map.get(t.$radius, $key);
+  @if $value == null {
+    @error "Radius '#{$key}' not found in $radius. Available: #{map.keys(t.$radius)}";
+  }
+  @return $value;
+}
+
+/// Get transition value
+/// @param {String} $key - Transition key from $transitions
+/// @return {String}
+/// @example transition: all transition('fast');
+@function transition($key) {
+  $value: map.get(t.$transitions, $key);
+  @if not $value {
+    @error "Transition '#{$key}' not found in $transitions. Available: #{map.keys(t.$transitions)}";
+  }
+  @return $value;
+}
+
+/// Get z-index value from the scale
+/// @param {String} $key - Z-index key from $z-index
+/// @return {Number}
+/// @example z-index: z('modal');
+@function z($key) {
+  $value: map.get(t.$z-index, $key);
+  @if not $value {
+    @error "Z-index '#{$key}' not found in $z-index. Available: #{map.keys(t.$z-index)}";
+  }
+  @return $value;
+}
+
+/// Convert px to rem (based on 16px root)
+/// @param {Number} $px - Pixel value
+/// @return {Length}
+/// @example font-size: to-rem(14);
+@function to-rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
