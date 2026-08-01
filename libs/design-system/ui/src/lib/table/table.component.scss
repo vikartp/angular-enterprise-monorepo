@@ -1,0 +1,82 @@
+@use 'sass:map';
+@use 'index' as ds;
+
+.ds-table-container {
+  background-color: ds.color('surface');
+  border-radius: ds.radius('xl');
+  border: 1px solid ds.color('border');
+  @include ds.elevation('md');
+  overflow: hidden;
+  width: 100%;
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  th, td {
+    padding: ds.spacing('4') ds.spacing('6');
+    border-bottom: 1px solid ds.color('border');
+  }
+
+  th {
+    @include ds.typography('overline');
+    color: ds.color('text-secondary');
+    background-color: ds.color('surface-elevated');
+  }
+
+  td {
+    @include ds.typography('body-md');
+    color: ds.color('text-primary');
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    transition: background-color ds.transition('fast');
+    
+    &:hover {
+      background-color: ds.color('surface-elevated');
+    }
+  }
+
+  .col-currency {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .col-actions {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: ds.spacing('1') ds.spacing('3');
+  border-radius: ds.radius('full');
+  @include ds.typography('caption');
+  font-weight: 600;
+
+  &.badge-in-stock {
+    background-color: ds.color('primary-light');
+    color: ds.color('primary-hover');
+  }
+
+  &.badge-low-stock {
+    background-color: #fef3c7; /* amber-100 */
+    color: ds.color('warning');
+  }
+
+  &.badge-out-of-stock {
+    background-color: #fee2e2; /* red-100 */
+    color: ds.color('danger');
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: ds.spacing('12');
+  color: ds.color('text-secondary');
+  font-style: italic;
+}

@@ -1,0 +1,38 @@
+<div class="ds-table-container">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        @for (col of columns; track col.key) {
+          <th [class]="'col-' + col.type">{{ col.header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data; track $index) {
+        <tr>
+          @for (col of columns; track col.key) {
+            <td [class]="'col-' + col.type">
+              @if (col.type === 'currency') {
+                {{ $any(row[col.key]) | currency }}
+              } @else if (col.type === 'badge') {
+                <span class="ds-badge" [class]="'badge-' + ((row[col.key] + '').replace(' ', '-').toLowerCase())">
+                  {{ row[col.key] }}
+                </span>
+              } @else if (col.type === 'actions') {
+                <ng-container *ngTemplateOutlet="actionsTemplate || null; context: { $implicit: row }"></ng-container>
+              } @else {
+                {{ row[col.key] }}
+              }
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columns.length" class="empty-state">
+            No data available.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

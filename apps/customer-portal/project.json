@@ -30,12 +30,7 @@
         ],
         "styles": [
           "apps/customer-portal/src/styles.scss"
-        ],
-        "server": "apps/customer-portal/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/customer-portal/src/server.ts"
-        },
-        "outputMode": "server"
+        ]
       },
       "configurations": {
         "production": {
@@ -61,9 +56,7 @@
       }
     },
     "serve": {
-      "continuous": true,
       "executor": "@angular/build:dev-server",
-      "defaultConfiguration": "development",
       "configurations": {
         "production": {
           "buildTarget": "customer-portal:build:production"
@@ -71,6 +64,10 @@
         "development": {
           "buildTarget": "customer-portal:build:development"
         }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/customer-portal/proxy.conf.json"
       }
     },
     "lint": {

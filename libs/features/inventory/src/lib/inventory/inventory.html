@@ -4,48 +4,13 @@
       <h2>Inventory Overview</h2>
       <p>Manage your product stock, prices, and status.</p>
     </div>
-    <ds-button variant="primary" size="md">Add New Item</ds-button>
+    <ds-button variant="primary" size="md" (clicked)="addNewItem()">Add New Item</ds-button>
   </header>
 
-  <div class="table-card">
-    <table class="inventory-table">
-      <thead>
-        <tr>
-          <th>SKU</th>
-          <th>Product Name</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Status</th>
-          <th class="actions-col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of inventory(); track item.id) {
-          <tr>
-            <td class="sku-cell">{{ item.sku }}</td>
-            <td class="name-cell">{{ item.name }}</td>
-            <td>{{ item.category }}</td>
-            <td class="price-cell">{{ item.price | currency }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>
-              <span class="status-badge" [class]="'status-' + item.status.replace(' ', '-').toLowerCase()">
-                {{ item.status }}
-              </span>
-            </td>
-            <td class="actions-col">
-              <ds-button variant="ghost" size="sm" (clicked)="editItem(item)">Edit</ds-button>
-              <ds-button variant="ghost" size="sm" class="danger-text" (clicked)="deleteItem(item)">Delete</ds-button>
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="7" class="empty-state">
-              No inventory items found.
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  <ds-table [data]="inventoryItems()" [columns]="columns" [actionsTemplate]="actionsTpl"></ds-table>
+  
+  <ng-template #actionsTpl let-item>
+    <ds-button variant="ghost" size="sm" (clicked)="editItem(item)">Update Qty</ds-button>
+    <ds-button variant="ghost" size="sm" class="danger-text" (clicked)="deleteItem(item)">Delete</ds-button>
+  </ng-template>
 </div>

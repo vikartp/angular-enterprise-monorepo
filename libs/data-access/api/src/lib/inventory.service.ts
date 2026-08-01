@@ -17,10 +17,25 @@ export interface InventoryItem {
 })
 export class InventoryService {
   private readonly http = inject(HttpClient);
+  private readonly apiUrl = '/api/inventory';
 
   getInventory(): Observable<InventoryItem[]> {
-    // In a real app this would be an API endpoint like '/api/inventory'
-    // Here we are fetching the static mock JSON from the public directory
-    return this.http.get<InventoryItem[]>('/inventory.json');
+    return this.http.get<InventoryItem[]>(this.apiUrl);
+  }
+
+  getInventoryItem(id: string): Observable<InventoryItem> {
+    return this.http.get<InventoryItem>(`${this.apiUrl}/${id}`);
+  }
+
+  createItem(item: Omit<InventoryItem, 'id' | 'status'>): Observable<InventoryItem> {
+    return this.http.post<InventoryItem>(this.apiUrl, item);
+  }
+
+  updateItem(id: string, item: Partial<InventoryItem>): Observable<InventoryItem> {
+    return this.http.put<InventoryItem>(`${this.apiUrl}/${id}`, item);
+  }
+
+  deleteItem(id: string): Observable<InventoryItem> {
+    return this.http.delete<InventoryItem>(`${this.apiUrl}/${id}`);
   }
 }

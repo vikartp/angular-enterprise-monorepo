@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use 'index' as ds;
 
 .inventory-container {
@@ -23,95 +22,6 @@
     @include ds.typography('body-md');
     color: ds.color('text-secondary');
   }
-}
-
-.table-card {
-  background-color: ds.color('surface');
-  border-radius: ds.radius('xl');
-  border: 1px solid ds.color('border');
-  @include ds.elevation('md');
-  overflow: hidden;
-}
-
-.inventory-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-
-  th, td {
-    padding: ds.spacing('4') ds.spacing('6');
-    border-bottom: 1px solid ds.color('border');
-  }
-
-  th {
-    @include ds.typography('overline');
-    color: ds.color('text-secondary');
-    background-color: ds.color('surface-elevated');
-  }
-
-  td {
-    @include ds.typography('body-md');
-    color: ds.color('text-primary');
-    vertical-align: middle;
-  }
-
-  tbody tr {
-    transition: background-color ds.transition('fast');
-    
-    &:hover {
-      background-color: ds.color('surface-elevated');
-    }
-  }
-
-  .sku-cell {
-    @include ds.typography('body-sm');
-    font-family: map.get(ds.$font-families, 'mono');
-    color: ds.color('text-secondary');
-  }
-
-  .name-cell {
-    font-weight: 500;
-  }
-
-  .price-cell {
-    font-variant-numeric: tabular-nums;
-  }
-
-  .actions-col {
-    text-align: right;
-    white-space: nowrap;
-  }
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: ds.spacing('1') ds.spacing('3');
-  border-radius: ds.radius('full');
-  @include ds.typography('caption');
-  font-weight: 600;
-
-  &.status-in-stock {
-    background-color: ds.color('primary-light');
-    color: ds.color('primary-hover');
-  }
-
-  &.status-low-stock {
-    background-color: #fef3c7; /* amber-100 */
-    color: ds.color('warning');
-  }
-
-  &.status-out-of-stock {
-    background-color: #fee2e2; /* red-100 */
-    color: ds.color('danger');
-  }
-}
-
-.empty-state {
-  text-align: center;
-  padding: ds.spacing('12');
-  color: ds.color('text-secondary');
-  font-style: italic;
 }
 
 ::ng-deep .danger-text .ds-btn__inner {

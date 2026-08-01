@@ -6,5 +6,6 @@
 // ═══════════════════════════════════════════════════════
 
 // ── Button ──
-export { ButtonComponent } from './lib/button/button.component';
+export * from './lib/button/button.component';
+export * from './lib/table/table.component';
 export type { ButtonVariant, ButtonSize } from './lib/button/button.component';
